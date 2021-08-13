@@ -6,7 +6,9 @@
     {"id":{"name":"tilesetTilemap47","path":"tilesets/tilesetTilemap47/tilesetTilemap47.yy",},"order":3,},
     {"id":{"name":"scrTilemapToolsUtility","path":"scripts/scrTilemapToolsUtility/scrTilemapToolsUtility.yy",},"order":0,},
     {"id":{"name":"objTestAutotile","path":"objects/objTestAutotile/objTestAutotile.yy",},"order":1,},
+    {"id":{"name":"scrTilemapToolsAutotile16_region","path":"scripts/scrTilemapToolsAutotile16_region/scrTilemapToolsAutotile16_region.yy",},"order":2,},
     {"id":{"name":"scrTilemapToolsAutotile16","path":"scripts/scrTilemapToolsAutotile16/scrTilemapToolsAutotile16.yy",},"order":0,},
+    {"id":{"name":"scrTilemapToolsAutotile47","path":"scripts/scrTilemapToolsAutotile47/scrTilemapToolsAutotile47.yy",},"order":1,},
     {"id":{"name":"sprTilemap47","path":"sprites/sprTilemap47/sprTilemap47.yy",},"order":1,},
   ],
   "Options": [
