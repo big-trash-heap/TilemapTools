@@ -1,0 +1,56 @@
+{
+  "resources": [
+    {"id":{"name":"sprTilemap16","path":"sprites/sprTilemap16/sprTilemap16.yy",},"order":0,},
+    {"id":{"name":"roomTestAutotile","path":"rooms/roomTestAutotile/roomTestAutotile.yy",},"order":0,},
+    {"id":{"name":"tilesetTilemap16","path":"tilesets/tilesetTilemap16/tilesetTilemap16.yy",},"order":2,},
+    {"id":{"name":"tilesetTilemap47","path":"tilesets/tilesetTilemap47/tilesetTilemap47.yy",},"order":3,},
+    {"id":{"name":"scrTilemapToolsUtility","path":"scripts/scrTilemapToolsUtility/scrTilemapToolsUtility.yy",},"order":0,},
+    {"id":{"name":"objTestAutotile","path":"objects/objTestAutotile/objTestAutotile.yy",},"order":1,},
+    {"id":{"name":"scrTilemapToolsAutotileUtility","path":"scripts/scrTilemapToolsAutotileUtility/scrTilemapToolsAutotileUtility.yy",},"order":1,},
+    {"id":{"name":"scrTilemapToolsAutotile16_def","path":"scripts/scrTilemapToolsAutotile16_def/scrTilemapToolsAutotile16_def.yy",},"order":0,},
+    {"id":{"name":"sprTilemap47","path":"sprites/sprTilemap47/sprTilemap47.yy",},"order":1,},
+  ],
+  "Options": [
+    {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
+    {"name":"Android","path":"options/android/options_android.yy",},
+    {"name":"HTML5","path":"options/html5/options_html5.yy",},
+    {"name":"iOS","path":"options/ios/options_ios.yy",},
+    {"name":"Linux","path":"options/linux/options_linux.yy",},
+    {"name":"macOS","path":"options/mac/options_mac.yy",},
+    {"name":"Main","path":"options/main/options_main.yy",},
+    {"name":"tvOS","path":"options/tvos/options_tvos.yy",},
+    {"name":"Windows","path":"options/windows/options_windows.yy",},
+  ],
+  "isDnDProject": false,
+  "isEcma": false,
+  "tutorialPath": "",
+  "configs": {
+    "name": "Default",
+    "children": [],
+  },
+  "RoomOrderNodes": [
+    {"roomId":{"name":"roomTestAutotile","path":"rooms/roomTestAutotile/roomTestAutotile.yy",},},
+  ],
+  "Folders": [
+    {"folderPath":"folders/TilemapToolsTest/visual.yy","order":0,"resourceVersion":"1.0","name":"visual","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/TilemapTools.yy","order":6,"resourceVersion":"1.0","name":"TilemapTools","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/TilemapTools/autotile.yy","order":1,"resourceVersion":"1.0","name":"autotile","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/TilemapTools/utility.yy","order":2,"resourceVersion":"1.0","name":"utility","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/TilemapToolsTest.yy","order":7,"resourceVersion":"1.0","name":"TilemapToolsTest","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/TilemapToolsTest/test_autotile.yy","order":1,"resourceVersion":"1.0","name":"test_autotile","tags":[],"resourceType":"GMFolder",},
+  ],
+  "AudioGroups": [
+    {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
+  ],
+  "TextureGroups": [
+    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,"resourceVersion":"1.3","name":"Default","resourceType":"GMTextureGroup",},
+  ],
+  "IncludedFiles": [],
+  "MetaData": {
+    "IDEVersion": "2.3.3.574",
+  },
+  "resourceVersion": "1.4",
+  "name": "TilemapTools",
+  "tags": [],
+  "resourceType": "GMProject",
+}
