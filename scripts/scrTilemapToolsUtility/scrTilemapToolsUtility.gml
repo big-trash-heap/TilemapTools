@@ -1,16 +1,17 @@
 
 #region for
 
-/// @function tilemapForRect(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2);
+//				callback = callback(tilemap_element_id, cell_x, cell_y, data)
+/// @function	tilemapForRect(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, callback, [data]);
 function tilemapForRect(_tilemapElementId,
-	_cellX1, _cellY1, _cellX2, _cellY2, _callback) {
+	_cellX1, _cellY1, _cellX2, _cellY2, _callback, _data) {
 	
 	var _cellYY;
 	for (; _cellX1 <= _cellX2; ++_cellX1) {
 		
 		for (_cellYY = _cellY1; _cellYY <= _cellY2; ++_cellYY) {
 			
-			_callback(_tilemapElementId, _cellX1, _cellYY);
+			_callback(_tilemapElementId, _cellX1, _cellYY, _data);
 		}
 	}
 }
@@ -37,11 +38,11 @@ function tilemapExists(_tilemap) {
 
 //
 function tilemapEntry(_tilemapElementId, _cellX, _cellY) {
-	return point_in_rectangle(
+	return (point_in_rectangle(
 		_cellX, _cellY, 
 		0, 0, 
 		tilemap_get_width(_tilemapElementId) - 1, tilemap_get_height(_tilemapElementId) - 1
-	);
+	) > 0);
 }
 
 //

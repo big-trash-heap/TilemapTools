@@ -2,7 +2,7 @@
 #region tile list
 
 self.tileList = [
-	"Tile16_0",
+	"Tile16",
 ];
 
 self.tileListObject = [];
@@ -39,7 +39,7 @@ self.tileScroll(0);
 
 var _obj, _ind = 0;
 
-#region Tile16_0
+#region Tile16
 
 _obj = self.tileListObject[_ind++];
 _obj.draw = function(_value, _x1, _y1, _x2, _y2) {
@@ -62,6 +62,8 @@ _obj.draw = function(_value, _x1, _y1, _x2, _y2) {
 	draw_set_valign(fa_top);
 	draw_text(_x2, _y1, bool(_value & 2));
 }
+_obj.set = tilemapAuto16APix_set;
+_obj.reset = tilemapAuto16APix_reset;
 
 #endregion
 
