@@ -50,9 +50,9 @@ function tilemapEntryAtPixel(_tilemapElementId, _x, _y) {
 }
 
 //
-function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler) {
+function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler, _data) {
 	
-	_value = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _value);
+	_value = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _value, _data);
 	if (_value == undefined) return false;
 	
 	tilemap_set(_tilemapElementId, _value, _cellX, _cellY);
@@ -61,3 +61,26 @@ function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler) {
 
 #endregion
 
+#region debug
+
+function tilemapDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell) {
+	
+	var _tilew = tilemap_get_tile_width(_tilemapElementId);
+	var _tileh = tilemap_get_tile_height(_tilemapElementId);
+	var _w = tilemap_get_width(_tilemapElementId);
+	var _h = tilemap_get_height(_tilemapElementId);
+	var _xx, _yy;
+	for (var _i = 0, _j; _i < _w; ++_i) {
+		for (_j = 0;     _j < _h; ++_j) {
+			_xx = _offsetX + _i * _tilew;
+			_yy = _offsetY + _j * _tileh;
+			
+			_drawCell(
+				tilemap_get(_tilemapElementId, _i, _j),
+				_xx, _yy, _xx + _tilew - 1, _yy + _tileh - 1,
+			);
+		}
+	}
+}
+
+#endregion
