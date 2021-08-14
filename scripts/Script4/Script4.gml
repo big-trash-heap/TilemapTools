@@ -3,7 +3,20 @@
 
 #region region
 
-function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cellX1, _cellY2=_cellY1, _offsetTile=1) {
+function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _offsetTile) {
+	__tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _offsetTile, __tilemapAuto16_region_is);
+}
+
+function tilemapAuto16_region_cp(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _offsetTile) {
+	__tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _offsetTile, __tilemapAuto16_region_is_cp);
+}
+
+#endregion
+
+
+#region __region
+
+function __tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cellX1, _cellY2=_cellY1, _offsetTile=1, _regionIs) {
 	
 	var _bitsGrow_W;
 	var _bitsGrow_H;
@@ -13,29 +26,29 @@ function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cell
 	
 	#region math first
 	
-	if (__tilemapAuto16_region_is(_tilemapElementId, _cellX1, _cellY1)) {
+	if (_regionIs(_tilemapElementId, _cellX1, _cellY1, _offsetTile)) {
 		
 		_bitsGrow_W = 0;
 		
-		_cell_t = __tilemapAuto16_region_is(_tilemapElementId, _cellX1, _cellY1 - 1);
-		_cell_b = __tilemapAuto16_region_is(_tilemapElementId, _cellX1, _cellY1 + 1);
-		_cell_l = __tilemapAuto16_region_is(_tilemapElementId, _cellX1 - 1, _cellY1);
-		_cell_r = __tilemapAuto16_region_is(_tilemapElementId, _cellX1 + 1, _cellY1);
+		_cell_t = _regionIs(_tilemapElementId, _cellX1, _cellY1 - 1, _offsetTile);
+		_cell_b = _regionIs(_tilemapElementId, _cellX1, _cellY1 + 1, _offsetTile);
+		_cell_l = _regionIs(_tilemapElementId, _cellX1 - 1, _cellY1, _offsetTile);
+		_cell_r = _regionIs(_tilemapElementId, _cellX1 + 1, _cellY1, _offsetTile);
 		
 		if !(_cell_t and _cell_r and
-			__tilemapAuto16_region_is(_tilemapElementId, _cellX1 + 1, _cellY1 - 1))
+			_regionIs(_tilemapElementId, _cellX1 + 1, _cellY1 - 1, _offsetTile))
 			_bitsGrow_W += 2;
 		
 		if !(_cell_b and _cell_r and
-			__tilemapAuto16_region_is(_tilemapElementId, _cellX1 + 1, _cellY1 + 1))
+			_regionIs(_tilemapElementId, _cellX1 + 1, _cellY1 + 1, _offsetTile))
 			_bitsGrow_W += 8;
 		
 		if !(_cell_t and _cell_l and
-			__tilemapAuto16_region_is(_tilemapElementId, _cellX1 - 1, _cellY1 - 1))
+			_regionIs(_tilemapElementId, _cellX1 - 1, _cellY1 - 1, _offsetTile))
 			_bitsGrow_W += 1;
 		
 		if !(_cell_b and _cell_l and
-			__tilemapAuto16_region_is(_tilemapElementId, _cellX1 - 1, _cellY1 + 1))
+			_regionIs(_tilemapElementId, _cellX1 - 1, _cellY1 + 1, _offsetTile))
 			_bitsGrow_W += 4;
 		
 		tilemap_set(_tilemapElementId, _bitsGrow_W + _offsetTile, _cellX1, _cellY1);
@@ -50,18 +63,18 @@ function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cell
 	
 	for (_xx = _cellX1 + 1; _xx <= _cellX2; ++_xx) {
 		
-		if (__tilemapAuto16_region_is(_tilemapElementId, _xx, _cellY1)) {
+		if (_regionIs(_tilemapElementId, _xx, _cellY1, _offsetTile)) {
 			
-			_cell_t = __tilemapAuto16_region_is(_tilemapElementId, _xx, _cellY1 - 1);
-			_cell_b = __tilemapAuto16_region_is(_tilemapElementId, _xx, _cellY1 + 1);
-			_cell_r = __tilemapAuto16_region_is(_tilemapElementId, _xx + 1, _cellY1);
+			_cell_t = _regionIs(_tilemapElementId, _xx, _cellY1 - 1, _offsetTile);
+			_cell_b = _regionIs(_tilemapElementId, _xx, _cellY1 + 1, _offsetTile);
+			_cell_r = _regionIs(_tilemapElementId, _xx + 1, _cellY1, _offsetTile);
 			
 			if !(_cell_t and _cell_r and
-				__tilemapAuto16_region_is(_tilemapElementId, _xx + 1, _cellY1 - 1))
+				_regionIs(_tilemapElementId, _xx + 1, _cellY1 - 1, _offsetTile))
 				_bitsGrow_W += 2;
 			
 			if !(_cell_b and _cell_r and
-				__tilemapAuto16_region_is(_tilemapElementId, _xx + 1, _cellY1 + 1))
+				_regionIs(_tilemapElementId, _xx + 1, _cellY1 + 1, _offsetTile))
 				_bitsGrow_W += 8;
 			
 			tilemap_set(_tilemapElementId, _bitsGrow_W + _offsetTile, _xx, _cellY1);
@@ -79,18 +92,18 @@ function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cell
 	
 	for (_yy = _cellY1 + 1; _yy <= _cellY2; ++_yy) {
 		
-		if (__tilemapAuto16_region_is(_tilemapElementId, _cellX1, _yy)) {
+		if (_regionIs(_tilemapElementId, _cellX1, _yy, _offsetTile)) {
 			
-			_cell_b = __tilemapAuto16_region_is(_tilemapElementId, _cellX1, _yy + 1);
-			_cell_r = __tilemapAuto16_region_is(_tilemapElementId, _cellX1 + 1, _yy);
-			_cell_l = __tilemapAuto16_region_is(_tilemapElementId, _cellX1 - 1, _yy);
+			_cell_b = _regionIs(_tilemapElementId, _cellX1, _yy + 1, _offsetTile);
+			_cell_r = _regionIs(_tilemapElementId, _cellX1 + 1, _yy, _offsetTile);
+			_cell_l = _regionIs(_tilemapElementId, _cellX1 - 1, _yy, _offsetTile);
 			
 			if !(_cell_b and _cell_l and
-				__tilemapAuto16_region_is(_tilemapElementId, _cellX1 - 1, _yy + 1))
+				_regionIs(_tilemapElementId, _cellX1 - 1, _yy + 1, _offsetTile))
 				_bitsGrow_H += 4;
 			
 			if !(_cell_b and _cell_r and
-				__tilemapAuto16_region_is(_tilemapElementId, _cellX1 + 1, _yy + 1))
+				_regionIs(_tilemapElementId, _cellX1 + 1, _yy + 1, _offsetTile))
 				_bitsGrow_H += 8;
 			
 			tilemap_set(_tilemapElementId, _bitsGrow_H + _offsetTile, _cellX1, _yy);
@@ -105,17 +118,17 @@ function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cell
 		
 		for (_xx = _cellX1 + 1; _xx <= _cellX2; ++_xx) {
 			
-			if (__tilemapAuto16_region_is(_tilemapElementId, _xx, _yy)) {
+			if (_regionIs(_tilemapElementId, _xx, _yy, _offsetTile)) {
 			
-				_cell_t = __tilemapAuto16_region_is(_tilemapElementId, _xx, _yy - 1);
+				_cell_t = _regionIs(_tilemapElementId, _xx, _yy - 1, _offsetTile);
 				if (_cell_t)
 					_bitsGrow_W += ((_cell_t - _offsetTile & 8) != 0) * 2;
 				
-				_cell_b = __tilemapAuto16_region_is(_tilemapElementId, _xx, _yy + 1);
-				_cell_r = __tilemapAuto16_region_is(_tilemapElementId, _xx + 1, _yy);
+				_cell_b = _regionIs(_tilemapElementId, _xx, _yy + 1, _offsetTile);
+				_cell_r = _regionIs(_tilemapElementId, _xx + 1, _yy, _offsetTile);
 			
 				if !(_cell_b and _cell_r and
-					__tilemapAuto16_region_is(_tilemapElementId, _xx + 1, _yy + 1))
+					_regionIs(_tilemapElementId, _xx + 1, _yy + 1, _offsetTile))
 					_bitsGrow_W += 8;
 			
 				tilemap_set(_tilemapElementId, _bitsGrow_W + _offsetTile, _xx, _yy);
@@ -133,11 +146,16 @@ function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cell
 
 #endregion
 
-
 #region __updata16
 
 function __tilemapAuto16_region_is(_tilemapElementId, _cellX, _cellY) {
 	return tilemap_get(_tilemapElementId, _cellX, _cellY);
+}
+
+function __tilemapAuto16_region_is_cp(_tilemapElementId, _cellX, _cellY, _offsetTile) {
+	_cellX = tilemap_get(_tilemapElementId, _cellX, _cellY);
+	if (_cellX == -1) return (15 + _offsetTile);
+	return _cellX;
 }
 
 #endregion

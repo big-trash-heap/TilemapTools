@@ -16,7 +16,7 @@ if (mouse_check_button(mb_right)) {
 // updata
 if (keyboard_check_pressed(vk_space)) {
 	
-	tilemapAuto16_region(self.tileCurrentTile, 
+	tilemapAuto16_region_cp(self.tileCurrentTile, 
 		0, 0,
 		tilemap_get_width(self.tileCurrentTile) - 1, tilemap_get_height(self.tileCurrentTile) - 1, 1);
 }
