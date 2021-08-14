@@ -10,8 +10,16 @@ function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cell
 	var _bitsNext_W;
 	var _bitsNext_H;
 	var _xx, _yy, _bits;
+	//var _top, _top_l, _top_r;
+	//var _bot, _bot_l, _bot_r;
 	
 	#region math first
+	
+	//_top = tilemap_get(_tilemapElementId, _cellX1, _cellY1 - 1);
+	//if (_top) { // pr
+		
+	//	_top_l = tilemap_get(_tilemapElementId, _cellX1 - 1, _cellY1 - 1);
+	//}
 	
 	_bitsGrow_W =
 		__tilemapAuto16_region_angle(_tilemapElementId, _cellX1, _cellY1,  1, -1, 2) +
@@ -53,7 +61,7 @@ function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cell
 		for (_xx = _cellX1 + 1; _xx <= _cellX2; ++_xx) {
 			
 			_bitsNext_W = 
-				((tilemap_get(_tilemapElementId, _xx, _yy - 1) - _offsetTile & 8) > 0) * 2 +
+				((tilemap_get(_tilemapElementId, _xx, _yy - 1) - _offsetTile & 8) != 0) * 2 +
 				__tilemapAuto16_region_angle(_tilemapElementId, _xx, _yy,  1,  1, 8);
 			
 			tilemap_set(_tilemapElementId, _bitsGrow_W + _bitsNext_W + _offsetTile, _xx, _yy);
@@ -69,9 +77,13 @@ function tilemapAuto16_region(_tilemapElementId, _cellX1, _cellY1, _cellX2=_cell
 
 #region __updata16
 
+function __tilemapAuto16_region_is(_tilemapElementId, _cellX, _cellY) {
+	return !tilemap_get(_tilemapElementId, _cellX, _cellY);
+}
+
 function __tilemapAuto16_region_angle(_tilemapElementId, _cellX, _cellY, _cellOffsetX, _cellOffsetY, _result) {
 	return (
-		(  tilemap_get(_tilemapElementId, _cellX, _cellY)
+		!( tilemap_get(_tilemapElementId, _cellX, _cellY)
 		&& tilemap_get(_tilemapElementId, _cellX + _cellOffsetX, _cellY + _cellOffsetY)
 		&& tilemap_get(_tilemapElementId, _cellX + _cellOffsetX, _cellY)
 		&& tilemap_get(_tilemapElementId, _cellX, _cellY + _cellOffsetY)
