@@ -6,7 +6,7 @@
     "path": "folders/TilemapTools/autotile.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Script4",
+  "name": "scrTilemapToolsAutotile16_region",
   "tags": [],
   "resourceType": "GMScript",
 }
