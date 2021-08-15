@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "not_include",
-    "path": "folders/not_include.yy",
+    "name": "__utility",
+    "path": "folders/TilemapTools/autotile/__utility.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scrTilemapToolsAutotile16_region",
+  "name": "scrTilemapToolsAutotileUtility",
   "tags": [],
   "resourceType": "GMScript",
 }

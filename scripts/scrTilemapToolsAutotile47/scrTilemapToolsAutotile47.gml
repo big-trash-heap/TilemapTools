@@ -1,2 +1,150 @@
 
+#region Auto
+
+function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
+	
+	//
+	if (tilemap_get(_tilemapElementId, _cellX, _cellY) > 0) exit;
+	
+	//
+	var _mathBits;
+	var _centerBits = 0;
+	
+	var _state_l = tilemap_get(_tilemapElementId, _cellX - 1, _cellY) > 1;
+	if (_state_l) {
+		
+		var _leftBits = 16;
+		_centerBits |= 8;
+	}
+	
+	var _state_r = tilemap_get(_tilemapElementId, _cellX + 1, _cellY) > 1;
+	if (_state_r) {
+		
+		var _rightBits = 8;
+		_centerBits |= 16;
+	}
+	
+	if (tilemap_get(_tilemapElementId, _cellX, _cellY - 1) > 1) {
+		
+		_centerBits |= 2;
+		_mathBits = 64;
+		
+		if (_state_l and tilemap_get(_tilemapElementId, _cellX - 1, _cellY - 1) > 1) {
+			
+			_centerBits |= 1;
+			_leftBits   |= 4;
+			_mathBits   |= 32;
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, 208, __tilemapAuto47_reset); // left-top
+		}
+		
+		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY - 1) > 1) {
+			
+			_centerBits |= 4;
+			_rightBits  |= 1;
+			_mathBits   |= 128;
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, 104, __tilemapAuto47_reset); // right-top
+		}
+		
+		tilemapModify(_tilemapElementId, _cellX, _cellY - 1, _mathBits, __tilemapAuto47_reset); // top
+	}
+	
+	if (tilemap_get(_tilemapElementId, _cellX, _cellY + 1) > 1) {
+		
+		_centerBits |= 64;
+		_mathBits = 2;
+		
+		if (_state_l and tilemap_get(_tilemapElementId, _cellX - 1, _cellY + 1) > 1) {
+			
+			_centerBits |= 32;
+			_leftBits   |= 128;
+			_mathBits   |= 1;
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, 22, __tilemapAuto47_reset); // left-down
+		}
+		
+		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY + 1) > 1) {
+			
+			_centerBits |= 128;
+			_rightBits  |= 32;
+			_mathBits   |= 4;
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, 11, __tilemapAuto47_reset); // right-down
+		}
+		
+		tilemapModify(_tilemapElementId, _cellX, _cellY + 1, _mathBits, __tilemapAuto47_reset); // bottom
+	}
+	
+	if (_state_l) {
+		
+		tilemapModify(_tilemapElementId, _cellX - 1, _cellY, _leftBits, __tilemapAuto47_reset); // left
+	}
+	
+	if (_state_r) {
+		
+		tilemapModify(_tilemapElementId, _cellX + 1, _cellY, _rightBits, __tilemapAuto47_reset); // right
+	}
+	
+	tilemapModify(_tilemapElementId, _cellX, _cellY, ~_centerBits & 511 | 256, __tilemapAuto47_set); // center
+}
+
+function tilemapAuto47APix_set(_tilemapElementId, _x, _y) {
+	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto47_set);
+}
+
+#endregion
+
+#region __handler47
+
+function __tilemapAuto47_set(_tile, _value) {
+	
+	if (_tile > -1) {
+		
+		if (_tile == 0) return (global.__tilemapAuto47_table[? _value] + 1);
+		return (global.__tilemapAuto47_table[? _value | global.__tilemapAuto47_table[? _tile - 1]] + 1);
+	}
+}
+
+function __tilemapAuto47_reset(_tile, _value) {
+	
+	if (_tile > -1) {
+		
+		if (_tile == 0) return (global.__tilemapAuto47_table[? _value] + 1);
+		return (global.__tilemapAuto47_table[? _value & global.__tilemapAuto47_table[? _tile - 1]] + 1);
+	}
+}
+
+#endregion
+
+#region __tables
+
+var _order_bits47 = [ 
+	     256, 257, 260, 261, 384, 385, 388,
+	389, 288, 289, 292, 293, 416, 417, 420,
+	421, 297, 301, 425, 429, 263, 391, 295,
+	423, 404, 436, 405, 437, 480, 481, 484,
+	485, 445, 487, 303, 431, 407, 439, 500,
+	501, 489, 493, 447, 495, 509, 503, 511,
+];
+
+global.__tilemapAuto47_table = ds_map_create();
+
+var _size = array_length(_order_bits47);
+for (var _i = 0, _bit; _i < _size; ++_i) {
+	
+	_bit = _order_bits47[_i];
+	global.__tilemapAuto47_table[? _i]   = _bit;
+	global.__tilemapAuto47_table[? _bit] = _i;
+}
+
+function __tilemapAuto47TableFree() {
+	
+	if (is_numeric(global.__tilemapAuto47_table) and
+		ds_exists(global.__tilemapAuto47_table, ds_type_map)) {
+		
+		ds_map_destroy(global.__tilemapAuto47_table);
+		global.__tilemapAuto47_table = undefined;
+		
+		show_debug_message("TilemapTools");
+	}
+}
+
+#endregion
 

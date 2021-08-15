@@ -51,9 +51,9 @@ function tilemapEntryAtPixel(_tilemapElementId, _x, _y) {
 }
 
 //
-function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler, _data) {
+function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler, _handlerData) {
 	
-	_value = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _value, _data);
+	_value = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _value, _handlerData);
 	if (_value == undefined) return false;
 	
 	tilemap_set(_tilemapElementId, _value, _cellX, _cellY);
