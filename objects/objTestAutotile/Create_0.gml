@@ -27,10 +27,14 @@ self.tileScroll = function(_step) {
 }
 
 array_resize(self.tileListObject, self.__tileSize);
-for (var _i = 0; _i < self.__tileSize; ++_i) {
+for (var _i = 0, _t; _i < self.__tileSize; ++_i) {
 	
 	layer_set_visible(self.tileList[_i], false);
 	self.tileListObject[_i] = {};
+	
+	_t = layer_tilemap_get_id(self.tileList[_i]);
+	tilemap_set_width(_t, room_width div tilemap_get_tile_width(_t));
+	tilemap_set_height(_t, room_height div tilemap_get_tile_height(_t));
 }
 
 self.tileScroll(1);
@@ -70,7 +74,7 @@ _obj.reset = tilemapAuto16APix_reset;
 #region
 
 _obj = self.tileListObject[_ind++];
-_obj.set = tilemapAuto47APix_set;
+_obj.set = tilemapAuto47APix_set_cd;
 _obj.reset = tilemapAuto47APix_reset;
 
 #endregion
