@@ -71,6 +71,7 @@ _obj.reset = tilemapAuto16APix_reset;
 
 _obj = self.tileListObject[_ind++];
 _obj.set = tilemapAuto47APix_set;
+_obj.reset = tilemapAuto47APix_reset;
 
 #endregion
 

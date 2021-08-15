@@ -34,7 +34,7 @@ function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 1;
 			_leftBits   |= 4;
 			_mathBits   |= 32;
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, 208, __tilemapAuto47_reset); // left-top
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, 303, __tilemapAuto47_reset); // left-top
 		}
 		
 		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY - 1) > 1) {
@@ -42,10 +42,10 @@ function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 4;
 			_rightBits  |= 1;
 			_mathBits   |= 128;
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, 104, __tilemapAuto47_reset); // right-top
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, 407, __tilemapAuto47_reset); // right-top
 		}
 		
-		tilemapModify(_tilemapElementId, _cellX, _cellY - 1, _mathBits, __tilemapAuto47_reset); // top
+		tilemapModify(_tilemapElementId, _cellX, _cellY - 1, _mathBits, __tilemapAuto47_reset_inv); // top
 	}
 	
 	if (tilemap_get(_tilemapElementId, _cellX, _cellY + 1) > 1) {
@@ -58,7 +58,7 @@ function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 32;
 			_leftBits   |= 128;
 			_mathBits   |= 1;
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, 22, __tilemapAuto47_reset); // left-down
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, 489, __tilemapAuto47_reset); // left-down
 		}
 		
 		if (_state_r and tilemap_get(_tilemapElementId, _cellX + 1, _cellY + 1) > 1) {
@@ -66,27 +66,80 @@ function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 			_centerBits |= 128;
 			_rightBits  |= 32;
 			_mathBits   |= 4;
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, 11, __tilemapAuto47_reset); // right-down
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, 500, __tilemapAuto47_reset); // right-down
 		}
 		
-		tilemapModify(_tilemapElementId, _cellX, _cellY + 1, _mathBits, __tilemapAuto47_reset); // bottom
+		tilemapModify(_tilemapElementId, _cellX, _cellY + 1, _mathBits, __tilemapAuto47_reset_inv); // bottom
 	}
 	
 	if (_state_l) {
 		
-		tilemapModify(_tilemapElementId, _cellX - 1, _cellY, _leftBits, __tilemapAuto47_reset); // left
+		tilemapModify(_tilemapElementId, _cellX - 1, _cellY, _leftBits, __tilemapAuto47_reset_inv); // left
 	}
 	
 	if (_state_r) {
 		
-		tilemapModify(_tilemapElementId, _cellX + 1, _cellY, _rightBits, __tilemapAuto47_reset); // right
+		tilemapModify(_tilemapElementId, _cellX + 1, _cellY, _rightBits, __tilemapAuto47_reset_inv); // right
 	}
 	
 	tilemapModify(_tilemapElementId, _cellX, _cellY, ~_centerBits & 511 | 256, __tilemapAuto47_set); // center
 }
 
+function tilemapAuto47_reset(tilemapElementId, _cellX, _cellY) {
+	
+	if (tilemap_get(tilemapElementId, _cellX, _cellY) <= 0) exit;
+	tilemap_set(tilemapElementId, 0, _cellX, _cellY);
+	
+	var _state_l = tilemap_get(tilemapElementId, _cellX - 1, _cellY);
+	var _state_r = tilemap_get(tilemapElementId, _cellX + 1, _cellY);
+	
+	if (_state_l) {
+		
+		tilemapModify(tilemapElementId, _cellX - 1, _cellY, 148, __tilemapAuto47_set); // left
+	}
+	
+	if (_state_r) {
+		
+		tilemapModify(tilemapElementId, _cellX + 1, _cellY, 41, __tilemapAuto47_set); // right
+	}
+	
+	if (tilemap_get(tilemapElementId, _cellX, _cellY - 1)) {
+		
+		tilemapModify(tilemapElementId, _cellX, _cellY - 1, 224, __tilemapAuto47_set); // top
+		
+		if (_state_l and tilemap_get(tilemapElementId, _cellX - 1, _cellY - 1)) {
+			
+			tilemapModify(tilemapElementId, _cellX - 1, _cellY - 1, 128, __tilemapAuto47_set); // left-top
+		}
+		
+		if (_state_r and tilemap_get(tilemapElementId, _cellX + 1, _cellY - 1)) {
+			
+			tilemapModify(tilemapElementId, _cellX + 1, _cellY - 1, 32, __tilemapAuto47_set); // right-top
+		}
+	}
+	
+	if (tilemap_get(tilemapElementId, _cellX, _cellY + 1)) {
+		
+		tilemapModify(tilemapElementId, _cellX, _cellY + 1, 7, __tilemapAuto47_set); // down
+		
+		if (_state_l and tilemap_get(tilemapElementId, _cellX - 1, _cellY + 1)) {
+			
+			tilemapModify(tilemapElementId, _cellX - 1, _cellY + 1, 4, __tilemapAuto47_set); // left-down
+		}
+		
+		if (_state_r and tilemap_get(tilemapElementId, _cellX + 1, _cellY + 1)) {
+			
+			tilemapModify(tilemapElementId, _cellX + 1, _cellY + 1, 1, __tilemapAuto47_set); // right-down
+		}
+	}
+}
+
 function tilemapAuto47APix_set(_tilemapElementId, _x, _y) {
 	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto47_set);
+}
+
+function tilemapAuto47APix_reset(_tilemapElementId, _x, _y) {
+	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto47_reset);
 }
 
 #endregion
@@ -108,6 +161,15 @@ function __tilemapAuto47_reset(_tile, _value) {
 		
 		if (_tile == 0) return (global.__tilemapAuto47_table[? _value] + 1);
 		return (global.__tilemapAuto47_table[? _value & global.__tilemapAuto47_table[? _tile - 1]] + 1);
+	}
+}
+
+function __tilemapAuto47_reset_inv(_tile, _value) {
+	
+	if (_tile > -1) {
+		
+		if (_tile == 0) return (global.__tilemapAuto47_table[? ~_value & 511] + 1);
+		return (global.__tilemapAuto47_table[? ~_value & 511 & global.__tilemapAuto47_table[? _tile - 1]] + 1);
 	}
 }
 
