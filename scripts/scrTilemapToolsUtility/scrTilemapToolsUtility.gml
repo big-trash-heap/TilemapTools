@@ -1,10 +1,10 @@
 
+
 #region for
 
 //				callback = callback(tilemap_element_id, cell_x, cell_y, data)
 /// @function	tilemapForRect(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, callback, [data]);
-function tilemapForRect(_tilemapElementId,
-	_cellX1, _cellY1, _cellX2, _cellY2, _callback, _data) {
+function tilemapForRect(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _callback, _data) {
 	
 	var _cellYY;
 	for (; _cellX1 <= _cellX2; ++_cellX1) {
@@ -18,14 +18,15 @@ function tilemapForRect(_tilemapElementId,
 
 #endregion
 
+
 #region basic
 
 //
-function tilemapExists(_tilemap) {
+function tilemapExists(_tilemapElementId) {
 	
 	try {
 			
-		var _result = tilemap_get_width(_tilemap);
+		var _result = tilemap_get_width(_tilemapElementId);
 		return (_result != -1);
 	}
 	catch (_0) {
@@ -62,6 +63,7 @@ function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler) {
 
 #endregion
 
+
 #region debug
 
 function tilemapDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell) {
@@ -85,3 +87,4 @@ function tilemapDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell) {
 }
 
 #endregion
+
