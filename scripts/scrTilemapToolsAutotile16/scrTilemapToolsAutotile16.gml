@@ -1,6 +1,6 @@
 
 
-#region Auto
+#region auto
 
 /// source https://www.codeproject.com/Articles/106884/Implementing-Auto-tiling-Functionality-in-a-Tile-M
 

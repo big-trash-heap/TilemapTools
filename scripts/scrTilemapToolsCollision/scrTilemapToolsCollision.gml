@@ -1,6 +1,6 @@
 
 
-#region Rectagle
+#region rectangle
 
 function tilemapCollsRect(_tilemapElementId, _x1, _y1, _x2, _y2, _callbackCheck=bool, _offsetX=0, _offsetY=0) {
 	

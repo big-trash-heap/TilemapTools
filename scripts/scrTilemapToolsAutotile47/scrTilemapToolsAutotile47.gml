@@ -1,6 +1,6 @@
 
 
-#region Auto
+#region auto
 
 function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 	
@@ -337,7 +337,6 @@ function tilemapAuto47APix_reset(_tilemapElementId, _x, _y) {
 }
 
 #endregion
-
 
 
 #region __handler47
