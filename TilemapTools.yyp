@@ -2,6 +2,7 @@
   "resources": [
     {"id":{"name":"sprTilemap16","path":"sprites/sprTilemap16/sprTilemap16.yy",},"order":0,},
     {"id":{"name":"scrTilemapToolsAutotileUtility","path":"scripts/scrTilemapToolsAutotileUtility/scrTilemapToolsAutotileUtility.yy",},"order":0,},
+    {"id":{"name":"scrTilemapToolsAutotile47_region","path":"scripts/scrTilemapToolsAutotile47_region/scrTilemapToolsAutotile47_region.yy",},"order":3,},
     {"id":{"name":"roomTestAutotile","path":"rooms/roomTestAutotile/roomTestAutotile.yy",},"order":0,},
     {"id":{"name":"tilesetTilemap16","path":"tilesets/tilesetTilemap16/tilesetTilemap16.yy",},"order":2,},
     {"id":{"name":"tilesetTilemap47","path":"tilesets/tilesetTilemap47/tilesetTilemap47.yy",},"order":3,},
