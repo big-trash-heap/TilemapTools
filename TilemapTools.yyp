@@ -5,6 +5,7 @@
     {"id":{"name":"roomTestAutotile","path":"rooms/roomTestAutotile/roomTestAutotile.yy",},"order":0,},
     {"id":{"name":"tilesetTilemap16","path":"tilesets/tilesetTilemap16/tilesetTilemap16.yy",},"order":2,},
     {"id":{"name":"tilesetTilemap47","path":"tilesets/tilesetTilemap47/tilesetTilemap47.yy",},"order":3,},
+    {"id":{"name":"scrUtility","path":"scripts/scrUtility/scrUtility.yy",},"order":4,},
     {"id":{"name":"scrMathUtility","path":"scripts/scrMathUtility/scrMathUtility.yy",},"order":3,},
     {"id":{"name":"scrTilemapToolsUtility","path":"scripts/scrTilemapToolsUtility/scrTilemapToolsUtility.yy",},"order":0,},
     {"id":{"name":"objTestAutotile","path":"objects/objTestAutotile/objTestAutotile.yy",},"order":1,},
