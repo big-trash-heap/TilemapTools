@@ -14,13 +14,13 @@ function tilemapCollsRect(_tilemapElementId, _x1, _y1, _x2, _y2,
 	var _tile_h = tilemap_get_tile_height(_tilemapElementId);
 	
 	_x1 = max(0,
-		(mathRounding(_x1, floor) - _offsetX) div _tile_w);
+		(apiMthARound(_x1, floor) - _offsetX) div _tile_w);
 	_y1 = max(0,
-		(mathRounding(_y1, floor) - _offsetY) div _tile_h);
+		(apiMthARound(_y1, floor) - _offsetY) div _tile_h);
 	_x2 = min(tilemap_get_width(_tilemapElementId) - 1, 
-		(mathRounding(_x2, ceil)  - _offsetX) div _tile_w);
+		(apiMthARound(_x2, ceil)  - _offsetX) div _tile_w);
 	_y2 = min(tilemap_get_height(_tilemapElementId) - 1,
-		(mathRounding(_y2, ceil)  - _offsetY) div _tile_h);
+		(apiMthARound(_y2, ceil)  - _offsetY) div _tile_h);
 	
 	//
 	var _callx, _cally;

@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "TilemapTools",
-    "path": "folders/TilemapTools.yy",
+    "name": "GML_StyleGuide_api-export",
+    "path": "folders/GML_StyleGuide_api-export.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scrMathUtility",
+  "name": "apiScrFunctor",
   "tags": [],
   "resourceType": "GMScript",
 }
