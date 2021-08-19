@@ -121,19 +121,6 @@ self.tileModeCall = function(_tile, _x, _y) {
 	var _f = self.tileCurrentObj.set[self.tileModeCd];
 	_f(_tile, _x, _y);
 }
-self.tileModeSwitch = function() {
-	if (keyboard_check_pressed(ord("1"))) {
-		self.tileModeCd = (self.tileModeCd + 1) mod 2;
-		tilemap_clear(self.tileCurrentTile, 0);
-	}
-}
-
-self.tileKindSwitch = function() {
-	if (keyboard_check_pressed(ord("Q")))
-		self.tileScroll(1);
-	if (keyboard_check_pressed(ord("E")))
-		self.tileScroll(-1);
-}
 
 #endregion
 
