@@ -28,10 +28,10 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 		
 		_bitsGrow_W = 0;
 		
-		_ang_tl = -1;;
-		_ang_tr = -1;;
-		_ang_bl = -1;;
-		_ang_br = -1;;
+		_ang_tl = -1;
+		_ang_tr = -1;
+		_ang_bl = -1;
+		_ang_br = -1;
 		
 		// top
 		if (_isCheck(_tilemapElementId, _cellX1, _cellY1 - 1, _isData)) {
@@ -95,8 +95,8 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 		
 		if (_isCheck(_tilemapElementId, _xx, _cellY1, _isData)) {
 			
-			_ang_tr = -1;;
-			_ang_br = -1;;
+			_ang_tr = -1;
+			_ang_br = -1;
 			
 			// top
 			if (_isCheck(_tilemapElementId, _xx, _cellY1 - 1, _isData)) {
@@ -146,8 +146,8 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 		
 		if (_isCheck(_tilemapElementId, _cellX1, _yy, _isData)) {
 			
-			_ang_bl = -1;;
-			_ang_br = -1;;
+			_ang_bl = -1;
+			_ang_br = -1;
 			
 			// left
 			if (_isCheck(_tilemapElementId, _cellX1 - 1, _yy, _isData)) {
@@ -201,7 +201,7 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 				if (_ang_tr == 0)
 					_bitsGrow_W |= 7;
 					
-				_ang_br = -1;;
+				_ang_br = -1;
 				
 				// right
 				if (_isCheck(_tilemapElementId, _xx + 1, _yy, _isData)) {
