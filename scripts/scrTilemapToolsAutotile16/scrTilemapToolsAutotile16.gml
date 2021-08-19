@@ -2,8 +2,6 @@
 
 #region auto
 
-/// source https://www.codeproject.com/Articles/106884/Implementing-Auto-tiling-Functionality-in-a-Tile-M
-
 function tilemapAuto16_set(_tilemapElementId, _cellX, _cellY) {
 	
 	// center

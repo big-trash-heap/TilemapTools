@@ -372,7 +372,7 @@ function __tilemapAuto47_reset_inv(_tile, _value) {
 
 #region __tables
 
-var _order_bits47 = [ 
+var _order_bits47 = [
 	     256, 257, 260, 261, 384, 385, 388,
 	389, 288, 289, 292, 293, 416, 417, 420,
 	421, 297, 301, 425, 429, 263, 391, 295,

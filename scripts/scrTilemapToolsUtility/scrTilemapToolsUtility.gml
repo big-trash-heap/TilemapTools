@@ -18,7 +18,6 @@ function tilemapForRect(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _
 
 #endregion
 
-
 #region basic
 
 //
