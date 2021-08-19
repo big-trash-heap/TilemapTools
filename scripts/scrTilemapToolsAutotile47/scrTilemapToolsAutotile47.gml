@@ -1,7 +1,39 @@
 
+/*
+	Смотри noteTilemapToolsAutotile
+	Предварительно смотрите scrTilemapToolsAutotile16
+
+	Аналогично scrTilemapToolsAutotile16
+	Мы ставим в каждый не пустой тайл на 8 бит 1
+	Установка ставит 1, а удаление 0
+	
+	###############
+	## 0 # 1 # 2 ##
+	## 3 # 8 # 4 ##
+	## 5 # 6 # 7 ##
+	###############
+*/
 
 #region auto
 
+/*
+	Ограничение и возможности данной реализации
+	1. Расположение тайлов нельзя изменить
+	2. На тайлмапе должны находится, только тайлы участвующие в автотайлинге
+	(иные тайлы не обрабатываются и это может привести к рантайм багам)
+	3. Смешивание режимов не гарантируется!
+	(смешивание режимов приведёт к рантайм багам)
+	4. Предварительные элементы на тайлмапе должны соблюдать логику автотайлинга и выбранного режима
+	(иначе это приведёт к рантайм багам)
+	
+	В отличие от тайлинга на 16, режим cd для автотайлинга 47, вводит дополнительную логику, 
+	которую нужно обязательно соблюдать (иначе это рантайм ошибки)
+	Я не могу описать эту логику, так как я жёстко её запрограммировал tilemapAuto47_set_cd
+	
+	Здесь так же создаётся таблица для перевода из битов в индексы, и наоборот
+*/
+
+/// @function		tilemapAuto47_set(tilemap_element_id, cell_x, cell_y);
 function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 	
 	//
@@ -86,7 +118,15 @@ function tilemapAuto47_set(_tilemapElementId, _cellX, _cellY) {
 	tilemapModify(_tilemapElementId, _cellX, _cellY, ~_centerBits & 511 | 256, __tilemapAuto47_set); // center
 }
 
+/// @function		tilemapAuto47_set_cd(tilemap_element_id, cell_x, cell_y);
 function tilemapAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
+	
+	/*
+		Да этот код получился довольно страшным
+		Это не планируется редактировать никогда!
+		
+		Я действительно не могу объяснить, что тут происходит
+	*/
 	
 	//
 	if (tilemap_get(_tilemapElementId, _cellX, _cellY) > 0) exit;
@@ -275,6 +315,7 @@ function tilemapAuto47_set_cd(_tilemapElementId, _cellX, _cellY) {
 	tilemapModify(_tilemapElementId, _cellX, _cellY, ~_centerBits & 511 | 256, __tilemapAuto47_set); // center
 }
 
+/// @function		tilemapAuto47_reset(tilemap_element_id, cell_x, cell_y);
 function tilemapAuto47_reset(tilemapElementId, _cellX, _cellY) {
 	
 	if (tilemap_get(tilemapElementId, _cellX, _cellY) <= 0) exit;
@@ -324,14 +365,17 @@ function tilemapAuto47_reset(tilemapElementId, _cellX, _cellY) {
 	}
 }
 
+/// @function		tilemapAuto47APix_set(tilemap_element_id, x, y);
 function tilemapAuto47APix_set(_tilemapElementId, _x, _y) {
 	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto47_set);
 }
 
+/// @function		tilemapAuto47APix_set_cd(tilemap_element_id, x, y);
 function tilemapAuto47APix_set_cd(_tilemapElementId, _x, _y) {
 	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto47_set_cd);
 }
 
+/// @function		tilemapAuto47APix_reset(tilemap_element_id, x, y);
 function tilemapAuto47APix_reset(_tilemapElementId, _x, _y) {
 	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto47_reset);
 }
@@ -363,7 +407,7 @@ function __tilemapAuto47_reset_inv(_tile, _value) {
 	
 	if (_tile > -1) {
 		
-		if (_tile == 0) return (global.__tilemapAuto47_table[? ~_value & 511] + 1);
+		//if (_tile == 0) return (global.__tilemapAuto47_table[? ~_value & 511] + 1);
 		return (global.__tilemapAuto47_table[? ~_value & 511 & global.__tilemapAuto47_table[? _tile - 1]] + 1);
 	}
 }
@@ -379,7 +423,7 @@ var _order_bits47 = [
 	423, 404, 436, 405, 437, 480, 481, 484,
 	485, 445, 487, 303, 431, 407, 439, 500,
 	501, 489, 493, 447, 495, 509, 503, 511,
-];
+]; // возможно это самое нужное, что тут есть)
 
 global.__tilemapAuto47_table = ds_map_create();
 
