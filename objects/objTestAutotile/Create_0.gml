@@ -37,7 +37,7 @@ for (var _i = 0, _t; _i < self.__tileSize; ++_i) {
 	tilemap_set_height(_t, room_height div tilemap_get_tile_height(_t));
 }
 
-self.tileScroll(1);
+self.tileScroll(0);
 
 #endregion
 
@@ -120,6 +120,19 @@ self.tileModeCd = 0;
 self.tileModeCall = function(_tile, _x, _y) {
 	var _f = self.tileCurrentObj.set[self.tileModeCd];
 	_f(_tile, _x, _y);
+}
+self.tileModeSwitch = function() {
+	if (keyboard_check_pressed(ord("1"))) {
+		self.tileModeCd = (self.tileModeCd + 1) mod 2;
+		tilemap_clear(self.tileCurrentTile, 0);
+	}
+}
+
+self.tileKindSwitch = function() {
+	if (keyboard_check_pressed(ord("Q")))
+		self.tileScroll(1);
+	if (keyboard_check_pressed(ord("E")))
+		self.tileScroll(-1);
 }
 
 #endregion
