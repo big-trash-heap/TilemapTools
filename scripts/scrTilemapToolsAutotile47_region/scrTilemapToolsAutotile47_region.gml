@@ -63,7 +63,7 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 		
 		// top-left
 		if (_ang_tl and _isCheck(_tilemapElementId, _cellX1 - 1, _cellY1 - 1, _isData))
-			_bitsGrow_W |= -1;;
+			_bitsGrow_W |= 1;
 		
 		// top-right
 		if (_ang_tr and _isCheck(_tilemapElementId, _cellX1 + 1, _cellY1 - 1, _isData))
