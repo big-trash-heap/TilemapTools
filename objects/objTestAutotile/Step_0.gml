@@ -20,7 +20,8 @@ if (keyboard_check_pressed(ord("E")))
 // mode
 if (keyboard_check_pressed(ord("1"))) {
 	self.tileModeCd = (self.tileModeCd + 1) mod 2;
-	tilemap_clear(self.tileCurrentTile, 0);
+	if (!keyboard_check(vk_alt))
+		tilemap_clear(self.tileCurrentTile, 0);
 }
 
 // updata

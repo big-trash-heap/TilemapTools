@@ -1,11 +1,31 @@
 
+/*
+	Идея заключается в том, что мы модифицируем конкректные биты окружающих нас тайлов,
+	устанавливая либо 0 при установки, либо 1 при удалении
+	При этом центральную ячейку мы полностью заливаем нужными битами
+*/
 
 #region auto
 
+// set    - установка
+// reset  - удаление
+// set_cd - режим закрытых краёв
+
+/*
+	Ограничение и возможности данной реализации
+	1. Расположение тайлов нельзя изменить
+	2. На тайлсете должны находится, только тайлы участвующие в автотайлинге
+	(иные тайлы не обрабатываются и это может привести к визуальным/рантайм багам)
+	3. Смешивание режимов гарантируется
+	4. Вы должны предварительно закрасить тайл индексом 1, или 16
+	(в противном случаи, возможны визуальные/рантайм баги)
+*/
+
+/// @function		tilemapAuto16_set(tilemap_element_id, cell_x, cell_y);
 function tilemapAuto16_set(_tilemapElementId, _cellX, _cellY) {
 	
 	// center
-	tilemapModify(_tilemapElementId, _cellX, _cellY, 0, __tilemapAuto16_set);
+	tilemap_set(_tilemapElementId, 1, _cellX, _cellY);
 	
 	// top
 	if (tilemapModify(_tilemapElementId, _cellX, _cellY - 1, 3, __tilemapAuto16_set)) {
@@ -28,9 +48,15 @@ function tilemapAuto16_set(_tilemapElementId, _cellX, _cellY) {
 	tilemapModify(_tilemapElementId, _cellX + 1, _cellY, 10, __tilemapAuto16_set); // right
 }
 
+/// @function		tilemapAuto16_set_cd(tilemap_element_id, cell_x, cell_y);
 function tilemapAuto16_set_cd(_tilemapElementId, _cellX, _cellY) {
 	
-	tilemapModify(_tilemapElementId, _cellX, _cellY, 0, __tilemapAuto16_set);
+	/*
+		Режим закрытых краёв, тут просто больше if-ов
+	*/
+	
+	// center
+	tilemap_set(_tilemapElementId, 1, _cellX, _cellY);
 	
 	//
 	var _mask_10_l = (tilemapEntry(_tilemapElementId, _cellX - 2, _cellY) ? 5  : 0);
@@ -103,10 +129,18 @@ function tilemapAuto16_set_cd(_tilemapElementId, _cellX, _cellY) {
 	}
 }
 
+/// @function		tilemapAuto16_reset(tilemap_element_id, cell_x, cell_y);
 function tilemapAuto16_reset(_tilemapElementId, _cellX, _cellY) {
 	
+	/*
+		Да это копия tilemapAuto16_set
+		Да это можно выразить общей функцией для tilemapAuto16_set и tilemapAuto16_reset
+		
+		Я разделил это по функциям для наглядности
+	*/
+	
 	// center
-	tilemapModify(_tilemapElementId, _cellX, _cellY, 15, __tilemapAuto16_reset);
+	tilemap_set(_tilemapElementId, 16, _cellX, _cellY);
 	
 	// top
 	if (tilemapModify(_tilemapElementId, _cellX, _cellY - 1, 12, __tilemapAuto16_reset)) {
@@ -129,14 +163,17 @@ function tilemapAuto16_reset(_tilemapElementId, _cellX, _cellY) {
 	tilemapModify(_tilemapElementId, _cellX + 1, _cellY, 5,  __tilemapAuto16_reset); // right
 }
 
+/// @function		tilemapAuto16APix_set(tilemap_element_id, x, y);
 function tilemapAuto16APix_set(_tilemapElementId, _x, _y) {
 	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto16_set);
 }
 
+/// @function		tilemapAuto16APix_set_cd(tilemap_element_id, x, y);
 function tilemapAuto16APix_set_cd(_tilemapElementId, _x, _y) {
 	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto16_set_cd);
 }
 
+/// @function		tilemapAuto16APix_reset(tilemap_element_id, x, y);
 function tilemapAuto16APix_reset(_tilemapElementId, _x, _y) {
 	__tilemapCallAPix(_tilemapElementId, _x, _y, tilemapAuto16_reset);
 }
@@ -149,7 +186,6 @@ function tilemapAuto16APix_reset(_tilemapElementId, _x, _y) {
 function __tilemapAuto16_set(_tile, _value) {
 	
 	if (_tile > -1) {
-		
 		if (_tile == 0) return (_value + 1);
 		return ((_value & _tile - 1) + 1);
 	}
