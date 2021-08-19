@@ -49,6 +49,11 @@ _obj = self.tileListObject[_ind++];
 _obj.set = [tilemapAuto16APix_set, tilemapAuto16APix_set_cd];
 _obj.reset = tilemapAuto16APix_reset;
 _obj.draw = function(_value, _x1, _y1, _x2, _y2) {
+	// table bits:
+	// ###########
+	// ## 0 # 1 ##
+	// ## 2 # 3 ##
+	// ###########
 	_value -= 1;
 	draw_set_alpha(1);
 	draw_set_color(c_red);
@@ -77,6 +82,12 @@ _obj = self.tileListObject[_ind++];
 _obj.set = [tilemapAuto47APix_set, tilemapAuto47APix_set_cd];
 _obj.reset = tilemapAuto47APix_reset;
 _obj.draw = function(_value, _x1, _y1, _x2, _y2) {
+	// table bits:
+	// ###############
+	// ## 0 # 1 # 2 ##
+	// ## 3 # 8 # 4 ##
+	// ## 5 # 6 # 7 ##
+	// ###############
 	if (_value > 0)
 		_value = global.__tilemapAuto47_table[? _value - 1];
 	draw_set_alpha(1);
