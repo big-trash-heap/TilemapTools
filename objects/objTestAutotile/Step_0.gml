@@ -29,3 +29,13 @@ if (keyboard_check_pressed(vk_control)) {
 	
 	tilemap_clear(self.tileCurrentTile, 0);
 }
+
+// updata
+if (keyboard_check_pressed(vk_space)) {
+	
+	tilemapAuto47_region_cd(self.tileCurrentTile,
+		0, 0,
+		tilemap_get_width(self.tileCurrentTile) - 1,
+		tilemap_get_height(self.tileCurrentTile) - 1
+	);
+}

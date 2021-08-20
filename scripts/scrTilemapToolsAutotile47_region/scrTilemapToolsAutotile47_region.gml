@@ -7,16 +7,21 @@ function tilemapAuto47_region(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cel
 	tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, __tilemapAuto47_region_is);
 }
 
-/// @function		tilemapAuto47_region_cp(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2);
-function tilemapAuto47_region_cp(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2) {
-	tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, __tilemapAuto47_region_is_cp);
+/// @function		tilemapAuto47_region_cd(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2);
+function tilemapAuto47_region_cd(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2) {
+	tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, __tilemapAuto47_region_is_cd);
 }
 
 #endregion
 
 #region auto-custom
 
-/// @function		tilemapAuto47_region_custom(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, predicat, predicat_data);
+/*
+
+*/
+
+///					predicate = predicate(tilemap_element_id, cell_x, cell_y, data);
+/// @function		tilemapAuto47_region_custom(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, predicate, predicate_data);
 function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _isCheck, _isData) {
 	
 	var _bitsGrow_W;
@@ -249,7 +254,7 @@ function __tilemapAuto47_region_is(_tilemapElementId, _cellX, _cellY) {
 	return tilemap_get(_tilemapElementId, _cellX, _cellY);
 }
 
-function __tilemapAuto47_region_is_cp(_tilemapElementId, _cellX, _cellY) {
+function __tilemapAuto47_region_is_cd(_tilemapElementId, _cellX, _cellY) {
 	_tilemapElementId = tilemap_get(_tilemapElementId, _cellX, _cellY);
 	if (_tilemapElementId == -1) return 1;
 	return _tilemapElementId;
