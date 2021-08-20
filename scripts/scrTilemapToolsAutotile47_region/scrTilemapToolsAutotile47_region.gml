@@ -2,6 +2,13 @@
 
 #region auto-default
 
+/*
+	В качестве окружения использует тайлмап
+	
+	Вы устанавливаете на тайлмапе 0 и 1 (как состояния есть и нету), после чего обновляете
+	необходимую область и вуаля.
+*/
+
 /// @function		tilemapAuto47_region(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2);
 function tilemapAuto47_region(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2) {
 	tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, __tilemapAuto47_region_is);
@@ -17,11 +24,21 @@ function tilemapAuto47_region_cd(_tilemapElementId, _cellX1, _cellY1, _cellX2, _
 #region auto-custom
 
 /*
-
+	Для каждой ячейки мы анализируем её окружение, и вычисляем нужный индекс
+	(конкретные  биты тут не играют роли)
+	
+	Мы так же можем передать предикат и данные для него, что даёт возможность читать
+	окружение из вне. (Например из буфера, или из ds_grid)
+	Это делает эту функцию очень гибкой
+	
+	Логика вычисления не много более сложная, мы вычисляем только то, что нужно,
+	остальное известно из предыдущих шагов вычисления
+	
+	От предиката ожидается либо true, либо false
 */
 
 ///					predicate = predicate(tilemap_element_id, cell_x, cell_y, data);
-/// @function		tilemapAuto47_region_custom(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, predicate, predicate_data);
+/// @function		tilemapAuto47_region_custom(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, predicate, [predicate_data]);
 function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _isCheck, _isData) {
 	
 	var _bitsGrow_W;
@@ -33,6 +50,8 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 	#region math first
 	
 	if (_isCheck(_tilemapElementId, _cellX1, _cellY1, _isData)) {
+		
+		// вычисляем первую ячейку
 		
 		_bitsGrow_W = 0;
 		
@@ -99,6 +118,7 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 		_bitsGrow_H = 0;
 	}
 	
+	// вычисляем первый ряд
 	for (_xx = _cellX1 + 1; _xx <= _cellX2; ++_xx) {
 		
 		if (_isCheck(_tilemapElementId, _xx, _cellY1, _isData)) {
@@ -154,6 +174,8 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 		
 		if (_isCheck(_tilemapElementId, _cellX1, _yy, _isData)) {
 			
+			// вычисляем первый столбец
+			
 			_ang_bl = -1;
 			_ang_br = -1;
 			
@@ -198,6 +220,7 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 			_bitsGrow_H = 0;
 		}
 		
+		// вычисляем каждый следующий ряд
 		for (_xx = _cellX1 + 1; _xx <= _cellX2; ++_xx) {
 			
 			if (_isCheck(_tilemapElementId, _xx, _yy, _isData)) {
