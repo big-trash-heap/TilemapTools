@@ -2,10 +2,12 @@
 
 #region auto-default
 
+/// @function		tilemapAuto47_region(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2);
 function tilemapAuto47_region(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2) {
 	tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, __tilemapAuto47_region_is);
 }
 
+/// @function		tilemapAuto47_region_cp(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2);
 function tilemapAuto47_region_cp(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2) {
 	tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, __tilemapAuto47_region_is_cp);
 }
@@ -14,6 +16,7 @@ function tilemapAuto47_region_cp(_tilemapElementId, _cellX1, _cellY1, _cellX2, _
 
 #region auto-custom
 
+/// @function		tilemapAuto47_region_custom(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, predicat, predicat_data);
 function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _isCheck, _isData) {
 	
 	var _bitsGrow_W;
@@ -140,7 +143,7 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 	
 	#endregion
 	
-	#region second
+	#region math second
 	
 	for (_yy = _cellY1 + 1; _yy <= _cellY2; ++_yy) {
 		

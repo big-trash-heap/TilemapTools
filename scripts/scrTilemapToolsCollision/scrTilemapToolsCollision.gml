@@ -2,6 +2,7 @@
 
 #region rectangle
 
+/// @function		tilemapCollsRect(tilemap_element_id, x1, y1, x2, y2, [callback_check=FunctorId], [callback_data], [offset_x=0], [offset_y=0]);
 function tilemapCollsRect(_tilemapElementId, _x1, _y1, _x2, _y2, 
 	_callbackCheck=apiFunctorId, _callbackData, _offsetX=0, _offsetY=0) {
 	
@@ -38,6 +39,7 @@ function tilemapCollsRect(_tilemapElementId, _x1, _y1, _x2, _y2,
 	return false;
 }
 
+/// @function		tilemapCollsRectInst(tilemap_element_id, inst, [inst_x=inst.x], [inst_y=inst.y], [callback_check=FunctorId], [callback_data], [offset_x=0], [offset_y=0]);
 function tilemapCollsRectInst(_tilemapElementId, _instance, _instX=_instance.x, _instY=_instance.y, 
 	_callbackCheck, _callbackData=_instance, _offsetX, _offsetY) {
 	_instX -= _instance.x;
@@ -53,6 +55,7 @@ function tilemapCollsRectInst(_tilemapElementId, _instance, _instX=_instance.x, 
 	);
 }
 
+/// @function		tilemapCollsRectSpr(tilemap_element_id, sprite, spr_x, spr_y, [callback_check=FunctorId], [callback_data], [offset_x=0], [offset_y=0]);
 function tilemapCollsRectSpr(_tilemapElementId, _sprite, _sprX, _sprY, 
 	_callbackCheck, _callbackData=_sprite, _offsetX, _offsetY) {
 	_sprX -= sprite_get_xoffset(_sprite);
