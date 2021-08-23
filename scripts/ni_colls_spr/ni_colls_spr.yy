@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "TilemapTools",
-    "path": "folders/TilemapTools.yy",
+    "name": "not_include",
+    "path": "folders/not_include.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scrUtility",
+  "name": "ni_colls_spr",
   "tags": [],
   "resourceType": "GMScript",
 }

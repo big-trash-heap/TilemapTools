@@ -20,7 +20,7 @@ function tilemapForRect(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _
 
 #region basic
 
-//
+/// @function		tilemapExists(tilemap_element_id);
 function tilemapExists(_tilemapElementId) {
 	
 	try {
@@ -36,7 +36,7 @@ function tilemapExists(_tilemapElementId) {
 	return false;
 }
 
-//
+/// @function		tilemapEntry(tilemap_element_id, cell_x, cell_y);
 function tilemapEntry(_tilemapElementId, _cellX, _cellY) {
 	return (point_in_rectangle(
 		_cellX, _cellY, 
@@ -45,12 +45,13 @@ function tilemapEntry(_tilemapElementId, _cellX, _cellY) {
 	) > 0);
 }
 
-//
+/// @function		tilemapEntryAtPixel(tilemap_element_id, x, y);
 function tilemapEntryAtPixel(_tilemapElementId, _x, _y) {
 	return (tilemap_get_cell_x_at_pixel(_tilemapElementId, _x, _y) != -1);
 }
 
-//
+//					handler = handler(tile_data, value);
+/// @function		tilemapModify(tilemap_element_id, cell_x, cell_y, handler);
 function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler) {
 	
 	_value = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _value);
@@ -65,6 +66,8 @@ function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler) {
 
 #region debug
 
+//					draw_cell = draw_cell(tile_data, x1, y1, x2, y2);
+/// @function		tilemapDebugDraw(tilemap_element_id, offset_x, offset_y, draw_cell);
 function tilemapDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell) {
 	
 	var _tilew = tilemap_get_tile_width(_tilemapElementId);

@@ -1,4 +1,7 @@
 
+//
+if (keyboard_check_pressed(ord("1"))) room_goto(roomTestCollision);
+
 // set
 if (mouse_check_button(mb_left)) {
 	
