@@ -1,4 +1,18 @@
 
+/*
+	Управление
+	Общее:
+	Q/E - переключение между 16 и 47
+	S - сменить режим
+	D - отлючить рисование
+	C - отчистить тайл
+	
+	Только для 47:
+	F - установить не пустую ячейку
+	G - удалить ячейку
+	Space - обновить тайлмап
+*/
+
 #region tile list
 
 self.tileList = [
@@ -73,6 +87,8 @@ _obj.draw = function(_value, _x1, _y1, _x2, _y2) {
 	draw_set_valign(fa_top);
 	draw_text(_x2, _y1, bool(_value & 2));
 }
+_obj.mode = 0;
+_obj.addcall = undefined;
 
 #endregion
 
@@ -122,18 +138,49 @@ _obj.draw = function(_value, _x1, _y1, _x2, _y2) {
 	draw_set_halign(fa_right);
 	draw_text(_x2, _y2, bool(_value & 128)); // bit 7
 }
+_obj.mode = 0;
+_obj.addcall = function() {
+	
+	// set
+	if (keyboard_check(ord("F"))) {
+		
+		tilemap_set_at_pixel(self.tileCurrentTile, 1, mouse_x, mouse_y);
+	}
+	
+	// reset
+	if (keyboard_check(ord("G"))) {
+		
+		tilemap_set_at_pixel(self.tileCurrentTile, 0, mouse_x, mouse_y);
+	}
+	
+	// updata
+	if (keyboard_check_pressed(vk_space)) {
+	
+		( self.tileCurrentObj.mode
+		? tilemapAuto47_region_cd
+		: tilemapAuto47_region)(self.tileCurrentTile,
+			0, 0,
+			tilemap_get_width(self.tileCurrentTile) - 1,
+			tilemap_get_height(self.tileCurrentTile) - 1
+		);
+	}
+}
 
 #endregion
 
 #region setting
 
-self.tileModeCd = 0;
 self.tileModeCall = function(_tile, _x, _y) {
-	var _f = self.tileCurrentObj.set[self.tileModeCd];
+	var _f = self.tileCurrentObj.set[self.tileCurrentObj.mode];
 	_f(_tile, _x, _y);
 }
+
+self.tileDebugDraw = true;
 
 #endregion
 
 //
 self.depth = -500;
+
+//
+//show_debug_overlay(true);

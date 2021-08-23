@@ -6,7 +6,7 @@
     "path": "folders/not_include.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scrTilemapToolsAutotile16_region",
+  "name": "ni_auto16_region",
   "tags": [],
   "resourceType": "GMScript",
 }

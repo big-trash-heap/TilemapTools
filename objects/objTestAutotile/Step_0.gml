@@ -18,24 +18,25 @@ if (keyboard_check_pressed(ord("E")))
 	self.tileScroll(-1);
 
 // mode
-if (keyboard_check_pressed(ord("1"))) {
-	self.tileModeCd = (self.tileModeCd + 1) mod 2;
+if (keyboard_check_pressed(ord("S"))) {
+	self.tileCurrentObj.mode = (self.tileCurrentObj.mode + 1) mod 2;
 	if (!keyboard_check(vk_alt))
 		tilemap_clear(self.tileCurrentTile, 0);
 }
 
-// updata
-if (keyboard_check_pressed(vk_control)) {
+// clear
+if (keyboard_check_pressed(ord("C"))) {
 	
 	tilemap_clear(self.tileCurrentTile, 0);
 }
 
-// updata
-if (keyboard_check_pressed(vk_space)) {
+// draw
+if (keyboard_check_pressed(ord("D"))) {
+	self.tileDebugDraw = !self.tileDebugDraw;
+}
+
+// addcall
+if (is_method(self.tileCurrentObj.addcall)) {
 	
-	tilemapAuto47_region_cd(self.tileCurrentTile,
-		0, 0,
-		tilemap_get_width(self.tileCurrentTile) - 1,
-		tilemap_get_height(self.tileCurrentTile) - 1
-	);
+	self.tileCurrentObj.addcall();
 }

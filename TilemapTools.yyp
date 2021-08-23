@@ -11,7 +11,7 @@
     {"id":{"name":"apiScrMath","path":"scripts/apiScrMath/apiScrMath.yy",},"order":1,},
     {"id":{"name":"scrTilemapToolsUtility","path":"scripts/scrTilemapToolsUtility/scrTilemapToolsUtility.yy",},"order":0,},
     {"id":{"name":"objTestAutotile","path":"objects/objTestAutotile/objTestAutotile.yy",},"order":1,},
-    {"id":{"name":"scrTilemapToolsAutotile16_region","path":"scripts/scrTilemapToolsAutotile16_region/scrTilemapToolsAutotile16_region.yy",},"order":0,},
+    {"id":{"name":"ni_auto16_region","path":"scripts/ni_auto16_region/ni_auto16_region.yy",},"order":0,},
     {"id":{"name":"scrTilemapToolsCollision","path":"scripts/scrTilemapToolsCollision/scrTilemapToolsCollision.yy",},"order":0,},
     {"id":{"name":"scrTilemapToolsAutotile16","path":"scripts/scrTilemapToolsAutotile16/scrTilemapToolsAutotile16.yy",},"order":0,},
     {"id":{"name":"apiScrFunctor","path":"scripts/apiScrFunctor/apiScrFunctor.yy",},"order":0,},
