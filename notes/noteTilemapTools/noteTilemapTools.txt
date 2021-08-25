@@ -1,0 +1,6 @@
+
+страница на github
+https://github.com/givename/TilemapTools
+
+онлайн-справка
+https://github.com/givename/TilemapTools/wiki

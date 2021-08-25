@@ -8,6 +8,9 @@
 	
 	Вы устанавливаете на тайлмапе 0 и 1 (как состояния есть и нету), после чего обновляете
 	необходимую область и вуаля.
+	(для проверки используется обычный оператор if())
+	
+	Свойства кроме индекса игнорируются (tile_get_mirror, tile_get_rotate, ...)
 */
 
 /// @function		tilemapAuto47_region(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2);
@@ -26,7 +29,7 @@ function tilemapAuto47_region_cd(_tilemapElementId, _cellX1, _cellY1, _cellX2, _
 
 /*
 	Для каждой ячейки мы анализируем её окружение, и вычисляем нужный индекс
-	(конкретные  биты тут не играют роли)
+	(конкретные биты тут не играют роли)
 	
 	Мы так же можем передать предикат и данные для него, что даёт возможность читать
 	окружение из вне. (Например из буфера, или из ds_grid)
@@ -36,6 +39,8 @@ function tilemapAuto47_region_cd(_tilemapElementId, _cellX1, _cellY1, _cellX2, _
 	остальное известно из предыдущих шагов вычисления
 	
 	От предиката ожидается либо true, либо false
+	
+	Свойства кроме индекса игнорируются (tile_get_mirror, tile_get_rotate, ...)
 */
 
 ///					predicate = predicate(tilemap_element_id, cell_x, cell_y, data)
