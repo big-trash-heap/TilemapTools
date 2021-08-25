@@ -40,17 +40,17 @@ function tilemapEntryAPix(_tilemapElementId, _x, _y) {
 }
 
 //					handler = handler(tile_data, data)
-/// @function		tilemapModify(tilemap_element_id, cell_x, cell_y, handler, handler_data);
-function tilemapModify(_tilemapElementId, _cellX, _cellY, _handler, _handler_data) {
+/// @function		tilemapModify(tilemap_element_id, cell_x, cell_y, handler, [data]);
+function tilemapModify(_tilemapElementId, _cellX, _cellY, _handler, _data) {
 	
 	/*
-		old-signature : tilemapModify(tilemap_element_id, cell_x, cell_y, handler_data, handler) (v1.0)
+		old-signature : tilemapModify(tilemap_element_id, cell_x, cell_y, value, handler) (v1.0)
 	*/
 	
-	_handler_data = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _handler_data);
-	if (_handler_data == undefined) return false;
+	_data = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _data);
+	if (_data == undefined) return false;
 	
-	tilemap_set(_tilemapElementId, _handler_data, _cellX, _cellY);
+	tilemap_set(_tilemapElementId, _data, _cellX, _cellY);
 	return true;
 }
 
@@ -79,9 +79,9 @@ function tilemapDebugExists(_tilemapElementId) {
 	return false;
 }
 
-//					draw_cell = draw_cell(tile_data, x1, y1, x2, y2)
-/// @function		tilemapDebugDraw(tilemap_element_id, offset_x, offset_y, draw_cell);
-function tilemapDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell) {
+//					draw_cell = draw_cell(tile_data, x1, y1, x2, y2, data)
+/// @function		tilemapDebugDraw(tilemap_element_id, offset_x, offset_y, draw_cell, [data]);
+function tilemapDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell, _data) {
 	
 	var _tilew = tilemap_get_tile_width(_tilemapElementId);
 	var _tileh = tilemap_get_tile_height(_tilemapElementId);
@@ -95,7 +95,7 @@ function tilemapDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell) {
 			
 			_drawCell(
 				tilemap_get(_tilemapElementId, _i, _j),
-				_xx, _yy, _xx + _tilew - 1, _yy + _tileh - 1,
+				_xx, _yy, _xx + _tilew - 1, _yy + _tileh - 1, _data
 			);
 		}
 	}
