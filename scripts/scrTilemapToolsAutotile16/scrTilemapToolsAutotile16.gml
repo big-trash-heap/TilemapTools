@@ -37,24 +37,24 @@ function tilemapAuto16_set(_tilemapElementId, _cellX, _cellY) {
 	tilemap_set(_tilemapElementId, 1, _cellX, _cellY);
 	
 	// top
-	if (tilemapModify(_tilemapElementId, _cellX, _cellY - 1, 3, __tilemapAuto16_set)) {
+	if (tilemapModify(_tilemapElementId, _cellX, _cellY - 1, __tilemapAuto16_set, 3)) {
 		
 		//
-		tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, 7,  __tilemapAuto16_set); // left-top
-		tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, 11, __tilemapAuto16_set); // right-top
+		tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, __tilemapAuto16_set, 7);  // left-top
+		tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, __tilemapAuto16_set, 11); // right-top
 	}
 	
 	// down
-	if (tilemapModify(_tilemapElementId, _cellX, _cellY + 1, 12, __tilemapAuto16_set)) {
+	if (tilemapModify(_tilemapElementId, _cellX, _cellY + 1, __tilemapAuto16_set, 12)) {
 		
 		//
-		tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, 13, __tilemapAuto16_set); // left-down
-		tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, 14, __tilemapAuto16_set); // right-down
+		tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, __tilemapAuto16_set, 13); // left-down
+		tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, __tilemapAuto16_set, 14); // right-down
 	}
 	
 	//
-	tilemapModify(_tilemapElementId, _cellX - 1, _cellY, 5,  __tilemapAuto16_set); // left
-	tilemapModify(_tilemapElementId, _cellX + 1, _cellY, 10, __tilemapAuto16_set); // right
+	tilemapModify(_tilemapElementId, _cellX - 1, _cellY, __tilemapAuto16_set, 5);  // left
+	tilemapModify(_tilemapElementId, _cellX + 1, _cellY, __tilemapAuto16_set, 10); // right
 }
 
 /// @function		tilemapAuto16_set_cd(tilemap_element_id, cell_x, cell_y);
@@ -74,66 +74,66 @@ function tilemapAuto16_set_cd(_tilemapElementId, _cellX, _cellY) {
 	var _mask_03_d = (tilemapEntry(_tilemapElementId, _cellX, _cellY + 2) ? 12 : 0);
 	
 	// top
-	if (tilemapModify(_tilemapElementId, _cellX, _cellY - 1, _mask_12_t, __tilemapAuto16_set)) {
+	if (tilemapModify(_tilemapElementId, _cellX, _cellY - 1, __tilemapAuto16_set, _mask_12_t)) {
 		
 		//
 		if (_mask_12_t == 0) {
 			
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, _mask_10_l, __tilemapAuto16_set); // left-top
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, _mask_05_r, __tilemapAuto16_set); // right-top
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, __tilemapAuto16_set, _mask_10_l); // left-top
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, __tilemapAuto16_set, _mask_05_r); // right-top
 		}
 		else {
 			
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, 7,  __tilemapAuto16_set); // left-top
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, 11, __tilemapAuto16_set); // right-top
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, __tilemapAuto16_set, 7);  // left-top
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, __tilemapAuto16_set, 11); // right-top
 		}
 	}
 	
 	// down
-	if (tilemapModify(_tilemapElementId, _cellX, _cellY + 1, _mask_03_d, __tilemapAuto16_set)) {
+	if (tilemapModify(_tilemapElementId, _cellX, _cellY + 1, __tilemapAuto16_set, _mask_03_d)) {
 		
 		//
 		if (_mask_03_d == 0) {
 			
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, _mask_10_l, __tilemapAuto16_set); // left-down
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, _mask_05_r, __tilemapAuto16_set); // right-down
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, __tilemapAuto16_set, _mask_10_l); // left-down
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, __tilemapAuto16_set, _mask_05_r); // right-down
 		}
 		else {
 			
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, 13, __tilemapAuto16_set); // left-down
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, 14, __tilemapAuto16_set); // right-down
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, __tilemapAuto16_set, 13); // left-down
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, __tilemapAuto16_set, 14); // right-down
 		}
 	}
 			
 	// left
-	if (tilemapModify(_tilemapElementId, _cellX - 1, _cellY, _mask_10_l, __tilemapAuto16_set)) {
+	if (tilemapModify(_tilemapElementId, _cellX - 1, _cellY, __tilemapAuto16_set, _mask_10_l)) {
 		
 		//
 		if (_mask_10_l == 0) {
 			
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, _mask_12_t, __tilemapAuto16_set); // left-top
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, _mask_03_d, __tilemapAuto16_set); // left-down
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, __tilemapAuto16_set, _mask_12_t); // left-top
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, __tilemapAuto16_set, _mask_03_d); // left-down
 		}
 		else {
 			
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, 7,  __tilemapAuto16_set); // left-top
-			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, 13, __tilemapAuto16_set); // left-down
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, __tilemapAuto16_set, 7); // left-top
+			tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, __tilemapAuto16_set, 13); // left-down
 		}
 	}
 			
 	// right
-	if (tilemapModify(_tilemapElementId, _cellX + 1, _cellY, _mask_05_r, __tilemapAuto16_set)) {
+	if (tilemapModify(_tilemapElementId, _cellX + 1, _cellY, __tilemapAuto16_set, _mask_05_r)) {
 		
 		//
 		if (_mask_05_r == 0) {
 			
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, _mask_12_t, __tilemapAuto16_set); // right-top
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, _mask_03_d, __tilemapAuto16_set); // right-down
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, __tilemapAuto16_set, _mask_12_t); // right-top
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, __tilemapAuto16_set, _mask_03_d); // right-down
 		}
 		else {
 			
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, 11, __tilemapAuto16_set); // right-top
-			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, 14, __tilemapAuto16_set); // right-down
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, __tilemapAuto16_set, 11); // right-top
+			tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, __tilemapAuto16_set, 14); // right-down
 		}
 	}
 }
@@ -152,24 +152,24 @@ function tilemapAuto16_reset(_tilemapElementId, _cellX, _cellY) {
 	tilemap_set(_tilemapElementId, 16, _cellX, _cellY);
 	
 	// top
-	if (tilemapModify(_tilemapElementId, _cellX, _cellY - 1, 12, __tilemapAuto16_reset)) {
+	if (tilemapModify(_tilemapElementId, _cellX, _cellY - 1, __tilemapAuto16_reset, 12)) {
 		
 		//
-		tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, 8, __tilemapAuto16_reset); // left-top
-		tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, 4, __tilemapAuto16_reset); // right-top
+		tilemapModify(_tilemapElementId, _cellX - 1, _cellY - 1, __tilemapAuto16_reset, 8); // left-top
+		tilemapModify(_tilemapElementId, _cellX + 1, _cellY - 1, __tilemapAuto16_reset, 4); // right-top
 	}
 	
 	// down
-	if (tilemapModify(_tilemapElementId, _cellX, _cellY + 1, 3, __tilemapAuto16_reset)) {
+	if (tilemapModify(_tilemapElementId, _cellX, _cellY + 1, __tilemapAuto16_reset, 3)) {
 		
 		//
-		tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, 2, __tilemapAuto16_reset); // left-down
-		tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, 1, __tilemapAuto16_reset); // right-down
+		tilemapModify(_tilemapElementId, _cellX - 1, _cellY + 1, __tilemapAuto16_reset, 2); // left-down
+		tilemapModify(_tilemapElementId, _cellX + 1, _cellY + 1, __tilemapAuto16_reset, 1); // right-down
 	}
 	
 	//
-	tilemapModify(_tilemapElementId, _cellX - 1, _cellY, 10, __tilemapAuto16_reset); // left
-	tilemapModify(_tilemapElementId, _cellX + 1, _cellY, 5,  __tilemapAuto16_reset); // right
+	tilemapModify(_tilemapElementId, _cellX - 1, _cellY, __tilemapAuto16_reset, 10); // left
+	tilemapModify(_tilemapElementId, _cellX + 1, _cellY, __tilemapAuto16_reset, 5);  // right
 }
 
 /// @function		tilemapAuto16APix_set(tilemap_element_id, x, y);

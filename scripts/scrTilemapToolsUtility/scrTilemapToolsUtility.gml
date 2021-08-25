@@ -20,22 +20,6 @@ function tilemapForRect(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _
 
 #region basic
 
-/// @function		tilemapExists(tilemap_element_id);
-function tilemapExists(_tilemapElementId) {
-	
-	try {
-			
-		var _result = tilemap_get_width(_tilemapElementId);
-		return (_result != -1);
-	}
-	catch (_0) {
-			
-		return false;
-	}
-	
-	return false;
-}
-
 /// @function		tilemapEntry(tilemap_element_id, cell_x, cell_y);
 function tilemapEntry(_tilemapElementId, _cellX, _cellY) {
 	return (point_in_rectangle(
@@ -45,19 +29,28 @@ function tilemapEntry(_tilemapElementId, _cellX, _cellY) {
 	) > 0);
 }
 
-/// @function		tilemapEntryAtPixel(tilemap_element_id, x, y);
-function tilemapEntryAtPixel(_tilemapElementId, _x, _y) {
+/// @function		tilemapEntryAPix(tilemap_element_id, x, y);
+function tilemapEntryAPix(_tilemapElementId, _x, _y) {
+	
+	/*
+		old-name : tilemapEntryAtPixel (v1.0)
+	*/
+	
 	return (tilemap_get_cell_x_at_pixel(_tilemapElementId, _x, _y) != -1);
 }
 
-//					handler = handler(tile_data, value);
-/// @function		tilemapModify(tilemap_element_id, cell_x, cell_y, handler);
-function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler) {
+//					handler = handler(tile_data, data)
+/// @function		tilemapModify(tilemap_element_id, cell_x, cell_y, handler, handler_data);
+function tilemapModify(_tilemapElementId, _cellX, _cellY, _handler, _handler_data) {
 	
-	_value = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _value);
-	if (_value == undefined) return false;
+	/*
+		old-signature : tilemapModify(tilemap_element_id, cell_x, cell_y, handler_data, handler) (v1.0)
+	*/
 	
-	tilemap_set(_tilemapElementId, _value, _cellX, _cellY);
+	_handler_data = _handler(tilemap_get(_tilemapElementId, _cellX, _cellY), _handler_data);
+	if (_handler_data == undefined) return false;
+	
+	tilemap_set(_tilemapElementId, _handler_data, _cellX, _cellY);
 	return true;
 }
 
@@ -66,7 +59,27 @@ function tilemapModify(_tilemapElementId, _cellX, _cellY, _value, _handler) {
 
 #region debug
 
-//					draw_cell = draw_cell(tile_data, x1, y1, x2, y2);
+/// @function		tilemapDebugExists(tilemap_element_id);
+function tilemapDebugExists(_tilemapElementId) {
+	
+	/*
+		old-name : tilemapExists (v1.0)
+	*/
+	
+	try {
+		
+		var _result = tilemap_get_width(_tilemapElementId);
+		return (_result != -1);
+	}
+	catch (_0) {
+		
+		return false;
+	}
+	
+	return false;
+}
+
+//					draw_cell = draw_cell(tile_data, x1, y1, x2, y2)
 /// @function		tilemapDebugDraw(tilemap_element_id, offset_x, offset_y, draw_cell);
 function tilemapDebugDraw(_tilemapElementId, _offsetX, _offsetY, _drawCell) {
 	
