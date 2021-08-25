@@ -39,7 +39,7 @@ function tilemapAuto47_region_cd(_tilemapElementId, _cellX1, _cellY1, _cellX2, _
 */
 
 ///					predicate = predicate(tilemap_element_id, cell_x, cell_y, data)
-/// @function		tilemapAuto47_region_custom(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, predicate, [predicate_data]);
+/// @function		tilemapAuto47_region_custom(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, predicate, [data]);
 function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _isCheck, _isData) {
 	
 	var _bitsGrow_W;
