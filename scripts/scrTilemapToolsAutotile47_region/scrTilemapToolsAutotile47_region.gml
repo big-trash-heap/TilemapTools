@@ -50,7 +50,7 @@ function tilemapAuto47_region_cd(_tilemapElementId, _cellX1, _cellY1, _cellX2, _
 
 ///					predicate = predicate(tilemap_element_id, cell_x, cell_y, data)
 /// @function		tilemapAuto47_region_custom(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2, predicate, [data]);
-function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _isCheck, _isData) {
+function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX2, _cellY2, _predicate, _data) {
 	
 	var _bitsGrow_W;
 	var _bitsGrow_H;
@@ -60,7 +60,7 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 	
 	#region math first
 	
-	if (_isCheck(_tilemapElementId, _cellX1, _cellY1, _isData)) {
+	if (_predicate(_tilemapElementId, _cellX1, _cellY1, _data)) {
 		
 		// вычисляем первую ячейку
 		
@@ -72,47 +72,47 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 		_ang_br = -1;
 		
 		// top
-		if (_isCheck(_tilemapElementId, _cellX1, _cellY1 - 1, _isData)) {
+		if (_predicate(_tilemapElementId, _cellX1, _cellY1 - 1, _data)) {
 			++_ang_tl;
 			++_ang_tr;
 			_bitsGrow_W |= 2;
 		}
 		
 		// left
-		if (_isCheck(_tilemapElementId, _cellX1 - 1, _cellY1, _isData)) {
+		if (_predicate(_tilemapElementId, _cellX1 - 1, _cellY1, _data)) {
 			++_ang_tl;
 			++_ang_bl;
 			_bitsGrow_W |= 8;
 		}
 		
 		// right
-		if (_isCheck(_tilemapElementId, _cellX1 + 1, _cellY1, _isData)) {
+		if (_predicate(_tilemapElementId, _cellX1 + 1, _cellY1, _data)) {
 			++_ang_tr;
 			++_ang_br;
 			_bitsGrow_W |= 16;
 		}
 		
 		// bottom
-		if (_isCheck(_tilemapElementId, _cellX1, _cellY1 + 1, _isData)) {
+		if (_predicate(_tilemapElementId, _cellX1, _cellY1 + 1, _data)) {
 			++_ang_bl;
 			++_ang_br;
 			_bitsGrow_W |= 64;
 		}
 		
 		// top-left
-		if (_ang_tl and _isCheck(_tilemapElementId, _cellX1 - 1, _cellY1 - 1, _isData))
+		if (_ang_tl and _predicate(_tilemapElementId, _cellX1 - 1, _cellY1 - 1, _data))
 			_bitsGrow_W |= 1;
 		
 		// top-right
-		if (_ang_tr and _isCheck(_tilemapElementId, _cellX1 + 1, _cellY1 - 1, _isData))
+		if (_ang_tr and _predicate(_tilemapElementId, _cellX1 + 1, _cellY1 - 1, _data))
 			_bitsGrow_W |= 4;
 		
 		// bottom-left
-		if (_ang_bl and _isCheck(_tilemapElementId, _cellX1 - 1, _cellY1 + 1, _isData))
+		if (_ang_bl and _predicate(_tilemapElementId, _cellX1 - 1, _cellY1 + 1, _data))
 			_bitsGrow_W |= 32;
 		
 		// bottom-right
-		if (_ang_br and _isCheck(_tilemapElementId, _cellX1 + 1, _cellY1 + 1, _isData))
+		if (_ang_br and _predicate(_tilemapElementId, _cellX1 + 1, _cellY1 + 1, _data))
 			_bitsGrow_W |= 128;
 		
 		tilemap_set(
@@ -132,36 +132,36 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 	// вычисляем первый ряд
 	for (_xx = _cellX1 + 1; _xx <= _cellX2; ++_xx) {
 		
-		if (_isCheck(_tilemapElementId, _xx, _cellY1, _isData)) {
+		if (_predicate(_tilemapElementId, _xx, _cellY1, _data)) {
 			
 			_ang_tr = -1;
 			_ang_br = -1;
 			
 			// top
-			if (_isCheck(_tilemapElementId, _xx, _cellY1 - 1, _isData)) {
+			if (_predicate(_tilemapElementId, _xx, _cellY1 - 1, _data)) {
 				++_ang_tr;
 				_bitsGrow_W |= 2;
 			}
 			
 			// right
-			if (_isCheck(_tilemapElementId, _xx + 1, _cellY1, _isData)) {
+			if (_predicate(_tilemapElementId, _xx + 1, _cellY1, _data)) {
 				++_ang_tr;
 				++_ang_br;
 				_bitsGrow_W |= 16;
 			}
 			
 			// bottom
-			if (_isCheck(_tilemapElementId, _xx, _cellY1 + 1, _isData)) {
+			if (_predicate(_tilemapElementId, _xx, _cellY1 + 1, _data)) {
 				++_ang_br;
 				_bitsGrow_W |= 64;
 			}
 			
 			// top-right
-			if (_ang_tr and _isCheck(_tilemapElementId, _xx + 1, _cellY1 - 1, _isData))
+			if (_ang_tr and _predicate(_tilemapElementId, _xx + 1, _cellY1 - 1, _data))
 				_bitsGrow_W |= 4;
 			
 			// bottom-right
-			if (_ang_br and _isCheck(_tilemapElementId, _xx + 1, _cellY1 + 1, _isData))
+			if (_ang_br and _predicate(_tilemapElementId, _xx + 1, _cellY1 + 1, _data))
 				_bitsGrow_W |= 128;
 			
 			tilemap_set(
@@ -183,7 +183,7 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 	
 	for (_yy = _cellY1 + 1; _yy <= _cellY2; ++_yy) {
 		
-		if (_isCheck(_tilemapElementId, _cellX1, _yy, _isData)) {
+		if (_predicate(_tilemapElementId, _cellX1, _yy, _data)) {
 			
 			// вычисляем первый столбец
 			
@@ -191,30 +191,30 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 			_ang_br = -1;
 			
 			// left
-			if (_isCheck(_tilemapElementId, _cellX1 - 1, _yy, _isData)) {
+			if (_predicate(_tilemapElementId, _cellX1 - 1, _yy, _data)) {
 				++_ang_bl;
 				_bitsGrow_H |= 8;
 			}
 			
 			// right
-			if (_isCheck(_tilemapElementId, _cellX1 + 1, _yy, _isData)) {
+			if (_predicate(_tilemapElementId, _cellX1 + 1, _yy, _data)) {
 				++_ang_br;
 				_bitsGrow_H |= 16;
 			}
 			
 			// bottom
-			if (_isCheck(_tilemapElementId, _cellX1, _yy + 1, _isData)) {
+			if (_predicate(_tilemapElementId, _cellX1, _yy + 1, _data)) {
 				++_ang_bl;
 				++_ang_br;
 				_bitsGrow_H |= 64;
 			}
 			
 			// bottom-left
-			if (_ang_bl and _isCheck(_tilemapElementId, _cellX1 - 1, _yy + 1, _isData))
+			if (_ang_bl and _predicate(_tilemapElementId, _cellX1 - 1, _yy + 1, _data))
 				_bitsGrow_H |= 32;
 			
 			// bottom-right
-			if (_ang_br and _isCheck(_tilemapElementId, _cellX1 + 1, _yy + 1, _isData))
+			if (_ang_br and _predicate(_tilemapElementId, _cellX1 + 1, _yy + 1, _data))
 				_bitsGrow_H |= 128;
 			
 			tilemap_set(
@@ -234,7 +234,7 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 		// вычисляем каждый следующий ряд
 		for (_xx = _cellX1 + 1; _xx <= _cellX2; ++_xx) {
 			
-			if (_isCheck(_tilemapElementId, _xx, _yy, _isData)) {
+			if (_predicate(_tilemapElementId, _xx, _yy, _data)) {
 				
 				_ang_tr = tilemap_get(_tilemapElementId, _xx, _yy - 1) - 1;
 				if (_ang_tr)
@@ -246,19 +246,19 @@ function tilemapAuto47_region_custom(_tilemapElementId, _cellX1, _cellY1, _cellX
 				_ang_br = -1;
 				
 				// right
-				if (_isCheck(_tilemapElementId, _xx + 1, _yy, _isData)) {
+				if (_predicate(_tilemapElementId, _xx + 1, _yy, _data)) {
 					++_ang_br;
 					_bitsGrow_W |= 16;
 				}
 				
 				// bottom
-				if (_isCheck(_tilemapElementId, _xx, _yy + 1, _isData)) {
+				if (_predicate(_tilemapElementId, _xx, _yy + 1, _data)) {
 					++_ang_br;
 					_bitsGrow_W |= 64;
 				}
 				
 				// bottom-right
-				if (_ang_br and _isCheck(_tilemapElementId, _xx + 1, _yy + 1, _isData))
+				if (_ang_br and _predicate(_tilemapElementId, _xx + 1, _yy + 1, _data))
 					_bitsGrow_W |= 128;
 				
 				tilemap_set(
