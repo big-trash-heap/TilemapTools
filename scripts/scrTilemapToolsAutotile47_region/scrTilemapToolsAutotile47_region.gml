@@ -1,6 +1,13 @@
 
 // аналогичный инструмент на 16 мне показался, крайне бесполезный
 
+/*
+	Ограничение и возможности данной реализации
+	1. Расположение тайлов нельзя изменить
+	2. Свойства кроме индекса игнорируются
+	(tile_get_mirror, tile_get_rotate, ...)
+*/
+
 #region auto-default
 
 /*
@@ -10,7 +17,6 @@
 	необходимую область и вуаля.
 	(для проверки используется обычный оператор if())
 	
-	Свойства кроме индекса игнорируются (tile_get_mirror, tile_get_rotate, ...)
 */
 
 /// @function		tilemapAuto47_region(tilemap_element_id, cell_x1, cell_y1, cell_x2, cell_y2);
@@ -40,7 +46,6 @@ function tilemapAuto47_region_cd(_tilemapElementId, _cellX1, _cellY1, _cellX2, _
 	
 	От предиката ожидается либо true, либо false
 	
-	Свойства кроме индекса игнорируются (tile_get_mirror, tile_get_rotate, ...)
 */
 
 ///					predicate = predicate(tilemap_element_id, cell_x, cell_y, data)
