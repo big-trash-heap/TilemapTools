@@ -22,10 +22,6 @@ function tilemapCollsRect(
 	_offsetX=tilemap_get_x(_tilemapElementId), _offsetY=tilemap_get_y(_tilemapElementId)) {
 	
 	//
-	//_offsetX += tilemap_get_x(_tilemapElementId); + layer_get_x(...);
-	//_offsetY += tilemap_get_y(_tilemapElementId); + layer_get_y(...);
-	
-	//
 	var _tilew = tilemap_get_tile_width(_tilemapElementId);
 	var _tileh = tilemap_get_tile_height(_tilemapElementId);
 	
