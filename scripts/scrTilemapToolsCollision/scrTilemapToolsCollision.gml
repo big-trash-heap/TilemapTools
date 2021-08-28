@@ -8,16 +8,22 @@
 	
 	Это не значит, что этот функционал написан только для прототипирования, он вполне оптимален
 	Его можно переписать под конкректную задачу, тогда он будет максимально эффективным
+	
+	В качестве offset_x и offset_y ожидается, что будет переданны актуальные координаты тайлмапа
+	(так как я не могу знать, слой на котором лежит тайлмап, я не могу знать, точных координат)
+	(tilemap_get_x + layer_get_x ...)
 */
 
 //					callback_check = callback_check(tile_data, data, x1, y1, x2, y2)
-/// @function		tilemapCollsRect(tilemap_element_id, x1, y1, x2, y2, [callback_check=FunctorId], [callback_data], [offset_x=0], [offset_y=0]);
-function tilemapCollsRect(_tilemapElementId, _x1, _y1, _x2, _y2, 
-	_callbackCheck=apiFunctorId, _callbackData, _offsetX=0, _offsetY=0) {
+/// @function		tilemapCollsRect(tilemap_element_id, x1, y1, x2, y2, [callback_check=FunctorId], [callback_data], [offset_x=tilemap_get_x], [offset_y=tilemap_get_y]);
+function tilemapCollsRect(
+	_tilemapElementId, _x1, _y1, _x2, _y2, 
+	_callbackCheck=apiFunctorId, _callbackData, 
+	_offsetX=tilemap_get_x(_tilemapElementId), _offsetY=tilemap_get_y(_tilemapElementId)) {
 	
 	//
-	_offsetX += tilemap_get_x(_tilemapElementId);
-	_offsetY += tilemap_get_y(_tilemapElementId);
+	//_offsetX += tilemap_get_x(_tilemapElementId); + layer_get_x(...);
+	//_offsetY += tilemap_get_y(_tilemapElementId); + layer_get_y(...);
 	
 	//
 	var _tilew = tilemap_get_tile_width(_tilemapElementId);
@@ -50,7 +56,8 @@ function tilemapCollsRect(_tilemapElementId, _x1, _y1, _x2, _y2,
 
 //					callback_check = callback_check(tile_data, data, x1, y1, x2, y2)
 /// @function		tilemapCollsRectInst(tilemap_element_id, inst, [inst_x=inst.x], [inst_y=inst.y], [callback_check=FunctorId], [callback_data], [offset_x=0], [offset_y=0]);
-function tilemapCollsRectInst(_tilemapElementId, _instance, _instX=_instance.x, _instY=_instance.y, 
+function tilemapCollsRectInst(
+	_tilemapElementId, _instance, _instX=_instance.x, _instY=_instance.y, 
 	_callbackCheck, _callbackData=_instance, _offsetX, _offsetY) {
 	_instX -= _instance.x;
 	_instY -= _instance.y;
