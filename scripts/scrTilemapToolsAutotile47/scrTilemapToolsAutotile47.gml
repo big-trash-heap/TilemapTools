@@ -410,7 +410,7 @@ function __tilemapAuto47_reset_inv(_tile, _value) {
 	if (_tile > -1) {
 		
 		//if (_tile == 0) return (global.__tilemapAuto47_table[? ~_value & 511] + 1);
-		return (global.__tilemapAuto47_table[? ~_value & 511 & global.__tilemapAuto47_table[? _tile - 1]] + 1);
+		return (global.__tilemapAuto47_table[? ~_value & global.__tilemapAuto47_table[? _tile - 1]] + 1);
 	}
 }
 
