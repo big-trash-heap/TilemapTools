@@ -38,8 +38,8 @@ self.tests = {};
 self.tests[$ "0"] = {
 	w: 48,
 	h: 60,
-	init: undefined,
-	destroy: undefined,
+	init: function() { self.list = ds_list_create(); },
+	destroy: function() { ds_list_destroy(self.list); },
 	test: function() {
 		
 		if (keyboard_check(ord("A")))
@@ -59,7 +59,7 @@ self.tests[$ "0"] = {
 		var _x2 = _x1 + self.w;
 		var _y2 = _y1 + self.h;
 		
-		var _colls = tilemapCollsRect(root.tilemap, _x1, _y1, _x2, _y2, root.check, 
+		var _colls = tilemapCollsRectList(root.tilemap, _x1, _y1, _x2, _y2, self.list, root.check, 
 			undefined, root.tilemap_offx, root.tilemap_offy);
 		
 		if (_colls)
@@ -70,6 +70,14 @@ self.tests[$ "0"] = {
 		draw_rectangle(_x1, _y1, _x2, _y2, false);
 		
 		show_debug_message(_colls);
+		
+		var _size = ds_list_size(self.list);
+		var _arrs = array_create(_size);
+		for (var _i = 0; _i < _size; ++_i)
+			_arrs[_i] = self.list[| _i];
+		
+		ds_list_clear(self.list);
+		show_debug_message(_arrs);
 	}
 };
 
@@ -108,4 +116,4 @@ self.test_set = function(_number) {
 }
 
 //
-self.test_set(1);
+self.test_set(0);
